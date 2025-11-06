@@ -93,7 +93,7 @@ export default function ExplorePage() {
         <AnimatedBackground />
 
         {/* Header */}
-        <div className="pt-2 text-center z-10 relative">
+        <div className="pt-8 text-center z-10 relative">
           <h5 className="text-xl font-bold">
             Spread so good, that they{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-yellow-400">
