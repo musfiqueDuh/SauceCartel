@@ -1,8 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Glowspace",
-  description: "A cinematic lava lamp mobile menu by WreefX Sys.",
+  title: "Snack Delulu",
+  description: "Homemade Snacks straight outta Delulu Kitchen!",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
