@@ -94,7 +94,7 @@ export default function ExplorePage() {
         <AnimatedBackground />
 
         {/* This wrapper holds all scrollable content and adds padding for the fixed navbar */}
-        <div className="pb-24 pt-4 relative z-10"> 
+        <div className="pb-48 pt-4 relative z-10"> 
 
           {/* Header */}
           {/* 2. Indentation Fix: text-left and px-6. 3. Spacing Fix: pt-8 -> pt-4 */}
