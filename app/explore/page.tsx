@@ -12,7 +12,7 @@ const items = [
   {
     id: 1,
     name: "Garlic Mayonnaise",
-    desc: "Smooth, creamy texture infused with the aroma of fresh raw garlic — perfect for sandwiches, wraps, or dipping.",
+    desc: "Eita holo creamy love story — raw garlic-er heavy aroma diye banano. Sandwich, wrap, ba fries-er jonno pura bhai-level combo!",
     price: "৳650",
     weight: "500g ±",
     img: "/garlic-mayo.png",
@@ -20,7 +20,7 @@ const items = [
   {
     id: 2,
     name: "Classic Mayonnaise Spread",
-    desc: "Rich, velvety classic mayo that adds a premium creamy layer to any meal — timeless and versatile.",
+    desc: "The OG mayo — soft, smooth, aar ekdom premium vibe. Kon dish-e dei na bhai? Timeless like your ex’s playlist.",
     price: "৳600",
     weight: "500g ±",
     img: "/classic-mayo.png",
@@ -28,7 +28,7 @@ const items = [
   {
     id: 3,
     name: "Tartar Sauce",
-    desc: "A tangy, herby blend with hints of pickle and lemon — made to complement seafood and fried bites.",
+    desc: "Tangy, herby, pickle-er chhoto punch — fried fish-er bestie. Taste-e ekta ajaira class ache.",
     price: "৳675",
     weight: "500g ±",
     img: "/tartar-sauce.png",
@@ -36,7 +36,7 @@ const items = [
   {
     id: 4,
     name: "Honey Mustard",
-    desc: "Sweet meets savory in this golden blend of pure honey and bold mustard — perfect for salads or grilled chicken.",
+    desc: "Sweet ar spicy dujon-e ekshathe chill kortese — grilled chicken ba salad-e mood set hoye jabe.",
     price: "৳700",
     weight: "500g ±",
     img: "/honey-mustard.png",
@@ -44,7 +44,7 @@ const items = [
   {
     id: 5,
     name: "Chilli Oil",
-    desc: "Fiery and aromatic — our chili oil blends crushed red peppers with deep, flavorful spice for an extra kick.",
+    desc: "Warning: hot af 🔥 — ei chili oil mane spice-e emotion. Noodles, dim, ba bhat — ekdom vibe-e fire.",
     price: "৳755",
     weight: "500g ±",
     img: "/chilli-oil.png",
@@ -52,7 +52,7 @@ const items = [
   {
     id: 6,
     name: "[HOT] Roasted Garlic Mayonnaise",
-    desc: "Roasted garlic richness with a smoky aroma — luxuriously smooth and bold in flavor.",
+    desc: "Smoky aroma, roasted garlic vibe — creamy-er majhe ekta asol drama ache. Ekbar khaili, repeat hobe.",
     price: "৳730",
     weight: "500g ±",
     img: "/roasted-garlic-mayo.png",
@@ -60,7 +60,7 @@ const items = [
   {
     id: 7,
     name: "Japanese/Korean Soya Dip",
-    desc: "Umami-packed dip crafted with authentic soya base — pairs beautifully with sushi, dumplings, or grilled meat.",
+    desc: "Umami-er overdose 😩 authentic soya base-e banano. Dumpling, sushi, ba grilled meat — sab kichur with VIP treatment.",
     price: "৳780",
     weight: "500g ±",
     img: "/soya-dip.png",
@@ -68,7 +68,7 @@ const items = [
   {
     id: 8,
     name: "Burger Sauce",
-    desc: "Signature light-red burger sauce that blends creamy mayo with tangy, smoky notes — the ultimate burger companion.",
+    desc: "Light-red creamy burger sauce — smoky, tangy, ar onek addictive. Burger e dao, life sorted bro 🍔.",
     price: "৳675",
     weight: "500g ±",
     img: "/burger-sauce.png",

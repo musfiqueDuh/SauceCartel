@@ -41,15 +41,16 @@ export default function LandingPage() {
             </span>
           </motion.h1>
 
-          {/* Subtext */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 1 }}
             className="mt-4 text-sm sm:text-base text-white/70 max-w-md"
           >
-            Homemade sauces, dips & snacks with main-character flavor.
-            Small-batch, big drip — straight from your local Snack Delulu kitchen.
+            <strong>Ekhane edi shudhu sauce na, eita ekta lifestyle.</strong><br />
+            Homemade sauces, dips, & snacks — <strong>ajaira din-er perfect therapy.</strong><br />
+            <strong>Small batch, zero shanti, full flavor.</strong><br />
+            🔥 “<strong>Mood off?</strong> Just dip it, <strong>bhai.</strong>”
           </motion.p>
 
           {/* CTAs */}
