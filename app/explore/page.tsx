@@ -1,103 +1,126 @@
-
 "use client";
 
 import AnimatedBackground from "../components/AnimatedBackground";
 import MotionWrapper from "../components/MotionWrapper";
 import Navbar from "../components/Navbar";
-import { motion } from "framer-motion";
+import { motion, PanInfo } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react"; // Imported useRef
 
+// ... (Your items array remains the same)
 const items = [
-  {
-    id: 1,
-    name: "Garlic Mayonnaise",
-    desc: "Eita holo creamy love story — raw garlic-er heavy aroma diye banano. Sandwich, wrap, ba fries-er jonno pura bhai-level combo!",
-    price: "৳650",
-    weight: "500g ±",
-    img: "/garlic-mayo.png",
-  },
-  {
-    id: 2,
-    name: "Classic Mayonnaise Spread",
-    desc: "The OG mayo — soft, smooth, aar ekdom premium vibe. Kon dish-e dei na bhai? Timeless like your ex’s playlist.",
-    price: "৳600",
-    weight: "500g ±",
-    img: "/classic-mayo.png",
-  },
-  {
-    id: 3,
-    name: "Tartar Sauce",
-    desc: "Tangy, herby, pickle-er chhoto punch — fried fish-er bestie. Taste-e ekta ajaira class ache.",
-    price: "৳675",
-    weight: "500g ±",
-    img: "/tartar-sauce.png",
-  },
-  {
-    id: 4,
-    name: "Honey Mustard",
-    desc: "Sweet ar spicy dujon-e ekshathe chill kortese — grilled chicken ba salad-e mood set hoye jabe.",
-    price: "৳700",
-    weight: "500g ±",
-    img: "/honey-mustard.png",
-  },
-  {
-    id: 5,
-    name: "Chilli Oil",
-    desc: "Warning: hot af 🔥 — ei chili oil mane spice-e emotion. Noodles, dim, ba bhat — ekdom vibe-e fire.",
-    price: "৳755",
-    weight: "500g ±",
-    img: "/chilli-oil.png",
-  },
-  {
-    id: 6,
-    name: "[HOT] Roasted Garlic Mayonnaise",
-    desc: "Smoky aroma, roasted garlic vibe — creamy-er majhe ekta asol drama ache. Ekbar khaili, repeat hobe.",
-    price: "৳730",
-    weight: "500g ±",
-    img: "/roasted-garlic-mayo.png",
-  },
-  {
-    id: 7,
-    name: "Japanese/Korean Soya Dip",
-    desc: "Umami-er overdose 😩 authentic soya base-e banano. Dumpling, sushi, ba grilled meat — sab kichur with VIP treatment.",
-    price: "৳780",
-    weight: "500g ±",
-    img: "/soya-dip.png",
-  },
-  {
-    id: 8,
-    name: "Burger Sauce",
-    desc: "Light-red creamy burger sauce — smoky, tangy, ar onek addictive. Burger e dao, life sorted bro 🍔.",
-    price: "৳675",
-    weight: "500g ±",
-    img: "/burger-sauce.png",
-  },
+    {
+      id: 1,
+      name: "Garlic Mayonnaise",
+      desc: "Eita holo creamy love story — raw garlic-er heavy aroma diye banano. Sandwich, wrap, ba fries-er jonno pura bhai-level combo!",
+      price: "৳650",
+      weight: "500g ±",
+      img: "/garlic-mayo.png",
+    },
+    {
+      id: 2,
+      name: "Classic Mayonnaise Spread",
+      desc: "The OG mayo — soft, smooth, aar ekdom premium vibe. Kon dish-e dei na bhai? Timeless like your ex’s playlist.",
+      price: "৳600",
+      weight: "500g ±",
+      img: "/classic-mayo.png",
+    },
+    {
+      id: 3,
+      name: "Tartar Sauce",
+      desc: "Tangy, herby, pickle-er chhoto punch — fried fish-er bestie. Taste-e ekta ajaira class ache.",
+      price: "৳675",
+      weight: "500g ±",
+      img: "/tartar-sauce.png",
+    },
+    {
+      id: 4,
+      name: "Honey Mustard",
+      desc: "Sweet ar spicy dujon-e ekshathe chill kortese — grilled chicken ba salad-e mood set hoye jabe.",
+      price: "৳700",
+      weight: "500g ±",
+      img: "/honey-mustard.png",
+    },
+    {
+      id: 5,
+      name: "Chilli Oil",
+      desc: "Warning: hot af 🔥 — ei chili oil mane spice-e emotion. Noodles, dim, ba bhat — ekdom vibe-e fire.",
+      price: "৳755",
+      weight: "500g ±",
+      img: "/chilli-oil.png",
+    },
+    {
+      id: 6,
+      name: "[HOT] Roasted Garlic Mayonnaise",
+      desc: "Smoky aroma, roasted garlic vibe — creamy-er majhe ekta asol drama ache. Ekbar khaili, repeat hobe.",
+      price: "৳730",
+      weight: "500g ±",
+      img: "/roasted-garlic-mayo.png",
+    },
+    {
+      id: 7,
+      name: "Japanese/Korean Soya Dip",
+      desc: "Umami-er overdose 😩 authentic soya base-e banano. Dumpling, sushi, ba grilled meat — sab kichur with VIP treatment.",
+      price: "৳780",
+      weight: "500g ±",
+      img: "/soya-dip.png",
+    },
+    {
+      id: 8,
+      name: "Burger Sauce",
+      desc: "Light-red creamy burger sauce — smoky, tangy, ar onek addictive. Burger e dao, life sorted bro 🍔.",
+      price: "৳675",
+      weight: "500g ±",
+      img: "/burger-sauce.png",
+    },
 ];
+
+const DRAG_THRESHOLD = 50; // Minimum distance (in pixels) to trigger a slide change
 
 export default function ExplorePage() {
   const [index, setIndex] = useState(0);
+  const isDragging = useRef(false);
+  const itemsLength = items.length;
 
-  // Autoplay carousel
+  // --- 1. AUTOPLAY MANAGEMENT ---
   useEffect(() => {
+    // Only autoplay if the user isn't dragging
+    if (isDragging.current) return;
+
     const interval = setInterval(
-      () => setIndex((prev) => (prev + 1) % items.length),
+      () => setIndex((prev) => (prev + 1) % itemsLength),
       4000
     );
     return () => clearInterval(interval);
-  }, []);
+  }, [itemsLength, index]); // Depend on index to restart timer on change
+
+  // --- 2. SWIPE/DRAG HANDLER ---
+const handleDragEnd = (
+  _event: MouseEvent | TouchEvent | PointerEvent, // Explicit type for the event
+  info: PanInfo                                 // Explicit type for pan information
+) => {
+  const offset = info.offset.x;
+  const velocity = info.velocity.x;
+
+    // Check if drag was significant enough to count as a swipe
+    if (offset > DRAG_THRESHOLD || velocity > 500) {
+      // Swiped Right (Go to previous card)
+      setIndex((prev) => (prev - 1 + itemsLength) % itemsLength);
+    } else if (offset < -DRAG_THRESHOLD || velocity < -500) {
+      // Swiped Left (Go to next card)
+      setIndex((prev) => (prev + 1) % itemsLength);
+    }
+  };
 
   return (
-    // 1. Navbar Fix: main should not have overflow-hidden
     <main className="min-h-screen bg-black text-white relative">
       <MotionWrapper>
         <AnimatedBackground />
 
-        {/* This wrapper holds all scrollable content and adds padding for the fixed navbar */}
-        <div className="pb-48 pt-4 relative z-10"> 
-
+        {/* Use a larger pb-48 for the fixed navbar with padding for the dots */}
+        <div className="pb-48 pt-4 relative z-10">
+          
           {/* Header */}
-          {/* 2. Indentation Fix: text-left and px-6. 3. Spacing Fix: pt-8 -> pt-4 */}
           <div className="pt-4 text-left px-6">
             <h5 className="text-xl font-bold leading-snug">
               Spread so good, that they{" "}
@@ -114,19 +137,26 @@ export default function ExplorePage() {
           </div>
 
           {/* Carousel container */}
-          {/* 3. Spacing Fix: mt-10 -> mt-8 */}
-          <div className="relative mt-8 flex justify-center items-center overflow-hidden">
+          <div className="relative mt-8 flex justify-center items-center">
+            {/* FRAME FOR DRAGGING */}
             <motion.div
               key={index}
               initial={{ x: 300, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: -300, opacity: 0 }}
               transition={{ type: "spring", stiffness: 60, damping: 15 }}
-              className="relative w-[85%] max-w-sm h-[60vh] rounded-3xl bg-white/10 backdrop-blur-md border border-white/15 overflow-hidden flex flex-col"
+              
+              // --- CAROUSEL DRAGGING ADDITIONS ---
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }} // Snap back after drag
+              onDragEnd={handleDragEnd}
+              onDragStart={() => isDragging.current = true}
+              onDragTransitionEnd={() => isDragging.current = false}
+              // -----------------------------------
+              
+              className="relative w-[85%] max-w-sm h-[60vh] rounded-3xl bg-white/10 backdrop-blur-md border border-white/15 overflow-hidden flex flex-col cursor-grab"
             >
-
               {/* --- 60% IMAGE --- */}
-              {/* Note: I'm leaving the original image div as-is */}
               <div className="relative w-full h-[60%] overflow-hidden">
                 <Image
                   src={items[index].img}
@@ -153,12 +183,25 @@ export default function ExplorePage() {
               </div>
             </motion.div>
           </div>
+          
+          {/* --- 3. NAVIGATION DOTS --- */}
+          <div className="mt-6 flex justify-center space-x-2">
+            {items.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setIndex(i)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  i === index ? 'w-6 bg-white' : 'w-2 bg-white/30 hover:bg-white/50'
+                }`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
 
         </div>
         {/* End of scrollable content wrapper */}
 
         {/* Navbar */}
-        {/* 1. Navbar Fix: Fixed positioning at the bottom of the screen */}
         <div className="fixed bottom-0 left-0 right-0 z-50">
           <Navbar />
         </div>
